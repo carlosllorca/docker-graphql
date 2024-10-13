@@ -26,11 +26,13 @@ jobs:
       run: |
         echo "Building docker image"
         docker build -t $REPOSITORY_NAME:0.0.1 .
+        docker build -t $REPOSITORY_NAME:latest .
         echo "Docker image built"
     - name: Push docker image
       run: |
         echo "Pushing docker image"
         docker push $REPOSITORY_NAME:0.0.1
+        docker push $REPOSITORY_NAME:latest
         echo "Docker image pushed"
 
     # - name: Build the Docker image
