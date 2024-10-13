@@ -15,11 +15,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Git Semantic Version
-      uses: PaulHatch/semantic-version@v4.0.3
+      uses: PaulHatch/semantic-version@v5.4.0
       with:
-        major_pattern: 'major:'
-        minor_pattern: 'feat:'
-        format: '${major}.${minor}.${patch}-prerelease${increment}'
+        major_pattern: "major:"
+        minor_pattern: "feat:"
+        bump_each_commit_patch_pattern: "true"
+        version_format: "${major}.${minor}.${patch}-prerelease${increment}"
       id: version
     - name: Docker login
       env: 
