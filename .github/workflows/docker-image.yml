@@ -1,5 +1,6 @@
 name: Docker Image CI
-
+env:
+  REPOSITORY_NAME: carlosllorca/docker-graphql
 on:
   push:
     branches: [ "master" ]
@@ -9,13 +10,10 @@ on:
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-
     - name: Docker login
       env: 
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
@@ -24,5 +22,16 @@ jobs:
         echo "Trying login to dockerhub with credentials"
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
         echo "Login ended"
+    - name: Build docker image
+      run: |
+        echo "Building docker image"
+        docker build -t $REPOSITORY_NAME:0.0.1 .
+        echo "Docker image built"
+    - name: Push docker image
+      run: |
+        echo "Pushing docker image"
+        docker push $REPOSITORY_NAME:0.0.1
+        echo "Docker image pushed"
+
     # - name: Build the Docker image
       # run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
