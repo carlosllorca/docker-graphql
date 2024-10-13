@@ -15,8 +15,7 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      with:
-        fetch-deps: 0
+
     - name: Docker login
       env: 
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
